@@ -10,8 +10,9 @@
   // -------------------------------------------------------------------
   const PRICES = { audio: 299, video: 499, storage: 99 };
 
-  const tiers = [
-    {
+  // Tier config — keyed by tier name for easy lookup
+  var tierMap = {
+    audio: {
       key: "audio",
       btn: document.getElementById("checkout-audio"),
       priceEl: document.getElementById("price-audio"),
@@ -19,7 +20,7 @@
       baseLink: "/checkout/audio",
       storageLink: "/checkout/audio-storage",
     },
-    {
+    video: {
       key: "video",
       btn: document.getElementById("checkout-video"),
       priceEl: document.getElementById("price-video"),
@@ -27,61 +28,82 @@
       baseLink: "/checkout/video",
       storageLink: "/checkout/video-storage",
     },
-  ];
+  };
+  var tiers = [tierMap.audio, tierMap.video];
 
   // -------------------------------------------------------------------
   // Price update + checkout — works immediately, links filled in later
   // -------------------------------------------------------------------
-  const checkoutIds = new Set(["checkout-audio", "checkout-video"]);
+  var checkoutIds = new Set(["checkout-audio", "checkout-video"]);
 
+  function updateTier(tier) {
+    if (!tier || !tier.btn || !tier.check) return;
+    var withStorage = tier.check.checked;
+    var total = PRICES[tier.key] + (withStorage ? PRICES.storage : 0);
+    var link = withStorage ? tier.storageLink : tier.baseLink;
+
+    // Update price in card header
+    if (tier.priceEl) {
+      tier.priceEl.textContent = "$" + total;
+      tier.priceEl.classList.add("price-updated");
+      setTimeout(function () {
+        tier.priceEl.classList.remove("price-updated");
+      }, 300);
+    }
+
+    // Update price on button
+    var priceSpan = tier.btn.querySelector(".checkout-price");
+    if (priceSpan) priceSpan.textContent = "$" + total;
+
+    // Update button link
+    tier.btn.href =
+      link || "/checkout/" + tier.key + (withStorage ? "-storage" : "");
+  }
+
+  // Initial render
   tiers.forEach(function (tier) {
-    if (!tier.btn || !tier.check) return;
+    updateTier(tier);
+  });
 
-    function getLink() {
-      return tier.check.checked ? tier.storageLink : tier.baseLink;
-    }
+  // -------------------------------------------------------------------
+  // Checkbox handling via document-level event delegation
+  // -------------------------------------------------------------------
+  document.addEventListener("change", function (e) {
+    var el = e.target;
+    if (!el.matches || !el.matches(".pricing-card__addon-check")) return;
+    var key = el.getAttribute("data-tier");
+    if (key && tierMap[key]) updateTier(tierMap[key]);
+  });
 
-    function updateTier() {
-      var withStorage = tier.check.checked;
-      var total = PRICES[tier.key] + (withStorage ? PRICES.storage : 0);
-      var link = getLink();
+  // Belt-and-suspenders: also listen for click (covers edge-case
+  // browsers that fire click but not change on label-wrapped checkboxes)
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest && e.target.closest(".pricing-card__addon");
+    if (!el) return;
+    var checkbox = el.querySelector(".pricing-card__addon-check");
+    if (!checkbox) return;
+    var key = checkbox.getAttribute("data-tier");
+    if (!key || !tierMap[key]) return;
+    // Defer so the browser has toggled `checked` before we read it
+    setTimeout(function () {
+      updateTier(tierMap[key]);
+    }, 0);
+  });
 
-      // Update price displays
-      if (tier.priceEl) {
-        tier.priceEl.textContent = "$" + total;
-        tier.priceEl.classList.add("price-updated");
-        setTimeout(function () {
-          tier.priceEl.classList.remove("price-updated");
-        }, 300);
-      }
-
-      var priceSpan = tier.btn.querySelector(".checkout-price");
-      if (priceSpan) priceSpan.textContent = "$" + total;
-
-      // Update button link
-      tier.btn.href =
-        link ||
-        "/checkout/" + tier.key + (withStorage ? "-storage" : "");
-    }
-
-    // Checkout button click
+  // -------------------------------------------------------------------
+  // Checkout button clicks
+  // -------------------------------------------------------------------
+  tiers.forEach(function (tier) {
+    if (!tier.btn) return;
     tier.btn.addEventListener("click", function (e) {
-      var link = getLink();
+      var link = tier.check && tier.check.checked
+        ? tier.storageLink
+        : tier.baseLink;
       if (link) {
         e.preventDefault();
         window.location.href = link;
       }
-      // If no link, the href fallback takes the user to server-side checkout redirect
     });
-
-    // Storage checkbox change
-    tier.check.addEventListener("change", updateTier);
-
-    // Set initial state
-    updateTier();
-
-    // Expose setter so the async config loader can inject links later
-    tier._update = updateTier;
   });
 
   // -------------------------------------------------------------------
@@ -94,16 +116,14 @@
     })
     .then(function (config) {
       // Inject Stripe payment links
+      if (config.stripeAudioLink) tierMap.audio.baseLink = config.stripeAudioLink;
+      if (config.stripeAudioStorageLink) tierMap.audio.storageLink = config.stripeAudioStorageLink;
+      if (config.stripeVideoLink) tierMap.video.baseLink = config.stripeVideoLink;
+      if (config.stripeVideoStorageLink) tierMap.video.storageLink = config.stripeVideoStorageLink;
+
+      // Re-render with the Stripe links
       tiers.forEach(function (tier) {
-        if (tier.key === "audio") {
-          tier.baseLink = config.stripeAudioLink || tier.baseLink;
-          tier.storageLink = config.stripeAudioStorageLink || tier.storageLink;
-        } else if (tier.key === "video") {
-          tier.baseLink = config.stripeVideoLink || tier.baseLink;
-          tier.storageLink = config.stripeVideoStorageLink || tier.storageLink;
-        }
-        // Re-run to set the correct href now that links are available
-        if (tier._update) tier._update();
+        updateTier(tier);
       });
 
       // Calendly embed
