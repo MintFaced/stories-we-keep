@@ -59,7 +59,9 @@
       if (priceSpan) priceSpan.textContent = "$" + total;
 
       // Update button link
-      tier.btn.href = link || "/checkout/" + tier.key;
+      tier.btn.href =
+        link ||
+        "/checkout/" + tier.key + (withStorage ? "-storage" : "");
     }
 
     // Checkout button click
@@ -94,11 +96,11 @@
       // Inject Stripe payment links
       tiers.forEach(function (tier) {
         if (tier.key === "audio") {
-          tier.baseLink = config.stripeAudioLink || null;
-          tier.storageLink = config.stripeAudioStorageLink || null;
+          tier.baseLink = config.stripeAudioLink || tier.baseLink;
+          tier.storageLink = config.stripeAudioStorageLink || tier.storageLink;
         } else if (tier.key === "video") {
-          tier.baseLink = config.stripeVideoLink || null;
-          tier.storageLink = config.stripeVideoStorageLink || null;
+          tier.baseLink = config.stripeVideoLink || tier.baseLink;
+          tier.storageLink = config.stripeVideoStorageLink || tier.storageLink;
         }
         // Re-run to set the correct href now that links are available
         if (tier._update) tier._update();
