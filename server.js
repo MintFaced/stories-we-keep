@@ -122,6 +122,27 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Checkout redirects — server-side fallback so buttons work even if
+  // the client-side config fetch hasn't completed or fails.
+  if (req.method === "GET" && pathname.startsWith("/checkout/")) {
+    const CHECKOUT_MAP = {
+      "/checkout/audio": STRIPE_AUDIO_LINK,
+      "/checkout/audio-storage": STRIPE_AUDIO_STORAGE_LINK,
+      "/checkout/video": STRIPE_VIDEO_LINK,
+      "/checkout/video-storage": STRIPE_VIDEO_STORAGE_LINK,
+    };
+    const stripeUrl = CHECKOUT_MAP[pathname];
+    if (stripeUrl) {
+      res.writeHead(302, { Location: stripeUrl });
+      res.end();
+      return;
+    }
+    // No Stripe link configured — fall back to the booking page
+    res.writeHead(302, { Location: "/#book" });
+    res.end();
+    return;
+  }
+
   // Static files
   if (req.method === "GET") {
     await serveStatic(pathname, res);

@@ -16,16 +16,16 @@
       btn: document.getElementById("checkout-audio"),
       priceEl: document.getElementById("price-audio"),
       check: document.querySelector('[data-tier="audio"]'),
-      baseLink: null,
-      storageLink: null,
+      baseLink: "/checkout/audio",
+      storageLink: "/checkout/audio-storage",
     },
     {
       key: "video",
       btn: document.getElementById("checkout-video"),
       priceEl: document.getElementById("price-video"),
       check: document.querySelector('[data-tier="video"]'),
-      baseLink: null,
-      storageLink: null,
+      baseLink: "/checkout/video",
+      storageLink: "/checkout/video-storage",
     },
   ];
 
@@ -59,7 +59,7 @@
       if (priceSpan) priceSpan.textContent = "$" + total;
 
       // Update button link
-      tier.btn.href = link || "#book";
+      tier.btn.href = link || "/checkout/" + tier.key;
     }
 
     // Checkout button click
@@ -69,7 +69,7 @@
         e.preventDefault();
         window.location.href = link;
       }
-      // If no link, the href="#book" fallback takes the user to booking
+      // If no link, the href fallback takes the user to server-side checkout redirect
     });
 
     // Storage checkbox change
