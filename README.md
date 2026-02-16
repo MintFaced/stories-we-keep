@@ -29,16 +29,15 @@ Then open `http://localhost:3000`.
 | Variable | Description |
 |---|---|
 | `PORT` | Server port (default: 3000) |
-| `STRIPE_SECRET_KEY` | Stripe secret key for payments |
-| `STRIPE_PUBLISHABLE_KEY` | Stripe publishable key (sent to frontend) |
-| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
 | `CALENDLY_URL` | Your Calendly scheduling link |
-| `PRICE_AMOUNT` | Price in cents (default: 29900 = $299) |
-| `PRICE_CURRENCY` | Currency code (default: usd) |
+| `STRIPE_AUDIO_LINK` | Stripe Payment Link URL for the audio session |
+| `STRIPE_AUDIO_STORAGE_LINK` | Stripe Payment Link URL for audio + storage |
+| `STRIPE_VIDEO_LINK` | Stripe Payment Link URL for the video session |
+| `STRIPE_VIDEO_STORAGE_LINK` | Stripe Payment Link URL for video + storage |
+
+Create four [Stripe Payment Links](https://dashboard.stripe.com/payment-links) (one per product/tier) and paste the URLs above.
 
 ## API
 
 - `GET /api/health` — Health check
-- `GET /api/config` — Frontend configuration (publishable key, Calendly URL, price)
-- `POST /api/checkout` — Create a Stripe Checkout session
-- `POST /api/webhook` — Stripe webhook endpoint
+- `GET /api/config` — Frontend configuration (Calendly URL, Stripe payment links)
