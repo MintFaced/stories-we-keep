@@ -10,7 +10,10 @@
   // -------------------------------------------------------------------
   let config = {
     calendlyUrl: "https://calendly.com",
-    stripePaymentLink: null,
+    stripeAudioLink: null,
+    stripeAudioStorageLink: null,
+    stripeVideoLink: null,
+    stripeVideoStorageLink: null,
   };
 
   try {
@@ -21,12 +24,45 @@
   }
 
   // -------------------------------------------------------------------
-  // Payment link — set checkout button URL
+  // Payment links — set checkout button URLs + storage add-on toggle
   // -------------------------------------------------------------------
-  const checkoutBtn = document.getElementById("checkout-btn");
-  if (checkoutBtn && config.stripePaymentLink) {
-    checkoutBtn.href = config.stripePaymentLink;
-  }
+  const PRICES = { audio: 299, video: 499, storage: 99 };
+
+  const tiers = [
+    {
+      key: "audio",
+      btn: document.getElementById("checkout-audio"),
+      priceEl: document.getElementById("price-audio"),
+      check: document.querySelector('[data-tier="audio"]'),
+      baseLink: config.stripeAudioLink,
+      storageLink: config.stripeAudioStorageLink,
+    },
+    {
+      key: "video",
+      btn: document.getElementById("checkout-video"),
+      priceEl: document.getElementById("price-video"),
+      check: document.querySelector('[data-tier="video"]'),
+      baseLink: config.stripeVideoLink,
+      storageLink: config.stripeVideoStorageLink,
+    },
+  ];
+
+  tiers.forEach((tier) => {
+    if (!tier.btn || !tier.check) return;
+
+    function updateTier() {
+      const withStorage = tier.check.checked;
+      const total = PRICES[tier.key] + (withStorage ? PRICES.storage : 0);
+      const link = withStorage ? tier.storageLink : tier.baseLink;
+
+      if (tier.priceEl) tier.priceEl.textContent = "$" + total;
+      tier.btn.querySelector(".checkout-price").textContent = "$" + total;
+      if (link) tier.btn.href = link;
+    }
+
+    tier.check.addEventListener("change", updateTier);
+    updateTier(); // set initial state
+  });
 
   // -------------------------------------------------------------------
   // Calendly embed
@@ -91,7 +127,7 @@
   // Scroll-reveal animation
   // -------------------------------------------------------------------
   const revealTargets = document.querySelectorAll(
-    ".step, .feature, .pricing-card, .faq, .interlude__title, .interlude__text"
+    ".step, .feature, .pricing-card, .pricing-card--featured, .faq, .interlude__title, .interlude__text"
   );
 
   revealTargets.forEach((el) => el.classList.add("reveal"));

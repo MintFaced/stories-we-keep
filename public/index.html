@@ -215,26 +215,63 @@
       <h2 class="section__title">Simple Pricing</h2>
       <p class="section__subtitle">One session. A lifetime of meaning.</p>
 
-      <div class="pricing-card">
-        <div class="pricing-card__badge">Most Popular</div>
-        <h3 class="pricing-card__name">The Legacy Session</h3>
-        <div class="pricing-card__price">
-          <span class="pricing-card__amount" id="price-display">$299</span>
+      <div class="pricing-grid">
+        <!-- AUDIO -->
+        <div class="pricing-card">
+          <h3 class="pricing-card__name">The Legacy Session</h3>
+          <p class="pricing-card__desc">Audio keepsake</p>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount" id="price-audio">$299</span>
+          </div>
+          <ul class="pricing-card__features">
+            <li>One-hour in-person legacy conversation</li>
+            <li>Professional audio capture equipment</li>
+            <li>A trained, empathetic legacy facilitator</li>
+            <li>Beautifully produced audio keepsake</li>
+            <li>Delivered on two USB keys within 7 days</li>
+          </ul>
+          <label class="pricing-card__addon" id="addon-audio">
+            <input type="checkbox" class="pricing-card__addon-check" data-tier="audio" />
+            <span class="pricing-card__addon-text">
+              Add long-term online storage <strong>+$99</strong>
+            </span>
+          </label>
+          <a class="btn btn--primary btn--lg btn--full" id="checkout-audio" href="#pricing">
+            Book &amp; Pay — <span class="checkout-price">$299</span>
+          </a>
+          <p class="pricing-card__note">
+            Prefer to book first and pay later? <a href="#book">Schedule a call</a> instead.
+          </p>
         </div>
-        <ul class="pricing-card__features">
-          <li>One-hour in-person legacy conversation</li>
-          <li>Professional audio capture equipment</li>
-          <li>A trained, empathetic legacy facilitator</li>
-          <li>Beautifully produced family keepsake</li>
-          <li>Delivered within 7 days</li>
-          <li>A living legacy — yours forever</li>
-        </ul>
-        <a class="btn btn--primary btn--lg btn--full" id="checkout-btn" href="#pricing">
-          Book &amp; Pay
-        </a>
-        <p class="pricing-card__note">
-          Prefer to book first and pay later? <a href="#book">Schedule a call</a> instead.
-        </p>
+
+        <!-- VIDEO -->
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-card__badge">Best Value</div>
+          <h3 class="pricing-card__name">The Legacy Session</h3>
+          <p class="pricing-card__desc">Audio + Video keepsake</p>
+          <div class="pricing-card__price">
+            <span class="pricing-card__amount" id="price-video">$499</span>
+          </div>
+          <ul class="pricing-card__features">
+            <li>One-hour in-person legacy conversation</li>
+            <li>Professional audio <strong>&amp; video</strong> capture</li>
+            <li>A trained, empathetic legacy facilitator</li>
+            <li>Beautifully produced audio + video keepsake</li>
+            <li>Delivered on two USB keys within 7 days</li>
+          </ul>
+          <label class="pricing-card__addon" id="addon-video">
+            <input type="checkbox" class="pricing-card__addon-check" data-tier="video" />
+            <span class="pricing-card__addon-text">
+              Add long-term online storage <strong>+$99</strong>
+            </span>
+          </label>
+          <a class="btn btn--primary btn--lg btn--full" id="checkout-video" href="#pricing">
+            Book &amp; Pay — <span class="checkout-price">$499</span>
+          </a>
+          <p class="pricing-card__note">
+            Prefer to book first and pay later? <a href="#book">Schedule a call</a> instead.
+          </p>
+        </div>
       </div>
     </div>
   </section>

@@ -459,9 +459,16 @@ a:hover { color: var(--color-walnut); }
 }
 
 /* --- Pricing ------------------------------------------------------- */
-.pricing-card {
-  max-width: 460px;
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  max-width: 920px;
   margin: 0 auto;
+  align-items: start;
+}
+
+.pricing-card {
   background: var(--color-warm-white);
   border-radius: 20px;
   padding: var(--space-xl);
@@ -469,6 +476,11 @@ a:hover { color: var(--color-walnut); }
   border: 2px solid var(--color-tan);
   position: relative;
   box-shadow: 0 8px 40px rgba(59, 42, 26, 0.06);
+}
+
+.pricing-card--featured {
+  border-color: var(--color-amber);
+  box-shadow: 0 12px 48px rgba(200, 118, 62, 0.15);
 }
 
 .pricing-card__badge {
@@ -492,6 +504,12 @@ a:hover { color: var(--color-walnut); }
   font-weight: 600;
   color: var(--color-ink);
   margin-top: var(--space-sm);
+  margin-bottom: 0.2rem;
+}
+
+.pricing-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-clay);
   margin-bottom: var(--space-md);
 }
 
@@ -510,7 +528,7 @@ a:hover { color: var(--color-walnut); }
 .pricing-card__features {
   list-style: none;
   text-align: left;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .pricing-card__features li {
@@ -545,6 +563,42 @@ a:hover { color: var(--color-walnut); }
   height: 9px;
   border-bottom: 2px solid var(--color-amber);
   border-right: 2px solid var(--color-amber);
+}
+
+.pricing-card__addon {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  margin-bottom: var(--space-md);
+  background: var(--color-amber-glow);
+  border: 1px solid rgba(200, 118, 62, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out);
+  text-align: left;
+}
+
+.pricing-card__addon:hover {
+  border-color: var(--color-amber);
+}
+
+.pricing-card__addon-check {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-amber);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.pricing-card__addon-text {
+  font-size: 0.85rem;
+  color: var(--color-walnut);
+  line-height: 1.4;
+}
+
+.pricing-card__addon-text strong {
+  color: var(--color-amber);
 }
 
 .pricing-card__note {
@@ -845,6 +899,13 @@ a:hover { color: var(--color-walnut); }
 
   .footer__links {
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 700px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 460px;
   }
 }
 

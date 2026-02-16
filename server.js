@@ -29,7 +29,10 @@ if (fsSync.existsSync(envPath)) {
 
 const PORT = Number(process.env.PORT || 3000);
 const CALENDLY_URL = process.env.CALENDLY_URL || "https://calendly.com";
-const STRIPE_PAYMENT_LINK = process.env.STRIPE_PAYMENT_LINK || "";
+const STRIPE_AUDIO_LINK = process.env.STRIPE_AUDIO_LINK || "";
+const STRIPE_AUDIO_STORAGE_LINK = process.env.STRIPE_AUDIO_STORAGE_LINK || "";
+const STRIPE_VIDEO_LINK = process.env.STRIPE_VIDEO_LINK || "";
+const STRIPE_VIDEO_STORAGE_LINK = process.env.STRIPE_VIDEO_STORAGE_LINK || "";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -111,7 +114,10 @@ const server = http.createServer(async (req, res) => {
   if (req.method === "GET" && pathname === "/api/config") {
     json(res, 200, {
       calendlyUrl: CALENDLY_URL,
-      stripePaymentLink: STRIPE_PAYMENT_LINK || null,
+      stripeAudioLink: STRIPE_AUDIO_LINK || null,
+      stripeAudioStorageLink: STRIPE_AUDIO_STORAGE_LINK || null,
+      stripeVideoLink: STRIPE_VIDEO_LINK || null,
+      stripeVideoStorageLink: STRIPE_VIDEO_STORAGE_LINK || null,
     });
     return;
   }
