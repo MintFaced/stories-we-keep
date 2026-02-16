@@ -1,64 +1,372 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Artist Chain Timeline</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <main>
-      <h1>Artist Ethereum Timeline</h1>
-      <p class="lead">
-        Focus on the last 30 days: biggest sale day, new smart contracts launched, tokens sold that the
-        artist created, and tokens sold that the artist previously bought.
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stories We Keep — Create Your Family's Living Legacy</title>
+  <meta name="description" content="Stories We Keep helps families capture the values, voice, and wisdom they want future generations to carry forward." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">Stories We Keep</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#what-you-get">What You Get</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#book" class="btn btn--nav">Create Your Legacy</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <p class="hero__kicker">Every family has a legacy worth keeping</p>
+      <h1 class="hero__title">
+        Your voice. Your values.<br />
+        <em>Your legacy.</em>
+      </h1>
+      <p class="hero__subtitle">
+        We help families capture the values, wisdom, and voice of the
+        people who matter most — so future generations can hold onto
+        what truly defines your family.
       </p>
+      <div class="hero__cta">
+        <a href="#book" class="btn btn--primary btn--lg">Create Your Legacy</a>
+        <a href="#how-it-works" class="btn btn--ghost btn--lg">Learn More</a>
+      </div>
+    </div>
+    <div class="hero__scroll-hint">
+      <span>Scroll</span>
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </header>
 
-      <section class="panel">
-        <form id="timeline-form" class="form-grid">
-          <label>
-            Artist Name
-            <input id="artist" name="artist" type="text" placeholder="Refik Anadol" />
-          </label>
+  <!-- PULL QUOTE -->
+  <section class="quote-banner">
+    <blockquote class="quote-banner__text">
+      "Will they remember what mattered to me? I wish I could leave more than photos."
+    </blockquote>
+    <p class="quote-banner__caption">— The question every family eventually asks</p>
+  </section>
 
-          <label>
-            Wallet Address or ENS
-            <input id="wallet" name="wallet" type="text" placeholder="0x... or mintface.eth" />
-          </label>
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <h2 class="section__title">How It Works</h2>
+      <p class="section__subtitle">Three simple steps to create your family's living legacy</p>
 
-          <label>
-            Optional NFT Contract Addresses (comma separated)
-            <input
-              id="contracts"
-              name="contracts"
-              type="text"
-              placeholder="Optional filter: 0x...,0x..."
-            />
-          </label>
+      <div class="steps">
+        <div class="step">
+          <div class="step__number">1</div>
+          <div class="step__icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="4" stroke="currentColor" stroke-width="2"/><path d="M16 16h16M16 24h16M16 32h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="step__title">Book &amp; Share What Matters</h3>
+          <p class="step__text">
+            Pick a time that works. Tell us about who we'll be sitting
+            with — what they stand for, the wisdom they carry, and the
+            values you want future generations to hold onto.
+          </p>
+        </div>
 
-          <label>
-            Chain
-            <input id="chain" name="chain" type="text" value="ethereum" />
-          </label>
+        <div class="step">
+          <div class="step__number">2</div>
+          <div class="step__icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="20" r="10" stroke="currentColor" stroke-width="2"/><path d="M24 30v8M18 42h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M14 20a10 10 0 0 0 20 0" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </div>
+          <h3 class="step__title">The Legacy Conversation</h3>
+          <p class="step__text">
+            A trained facilitator guides a relaxed, one-hour conversation
+            in person. No scripts. No rush. Just thoughtful questions that
+            draw out the values, lessons, and wisdom that define your family.
+          </p>
+        </div>
 
-          <button id="load-button" type="submit">Build Timeline</button>
-        </form>
+        <div class="step">
+          <div class="step__number">3</div>
+          <div class="step__icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M12 36V18a4 4 0 0 1 4-4h16a4 4 0 0 1 4 4v18" stroke="currentColor" stroke-width="2"/><path d="M8 36h32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="26" r="4" stroke="currentColor" stroke-width="2"/><path d="M28 22v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M32 24v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="step__title">Receive Your Family Legacy</h3>
+          <p class="step__text">
+            Within a week, you receive a beautifully produced keepsake
+            — their voice, their values, their wisdom — yours to
+            pass down for generations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <p id="status" class="notice">Ready.</p>
-        <div id="metrics" class="metrics" aria-live="polite"></div>
-      </section>
+  <!-- WHAT YOU GET -->
+  <section class="section section--warm" id="what-you-get">
+    <div class="container">
+      <h2 class="section__title">What You Get</h2>
+      <p class="section__subtitle">More than memories — a living family legacy</p>
 
-      <section class="timeline-wrap" aria-label="Timeline output">
-        <div id="timeline" class="timeline"></div>
-      </section>
-    </main>
+      <div class="features">
+        <div class="feature">
+          <div class="feature__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/><polygon points="13,11 23,16 13,21" fill="currentColor"/></svg>
+          </div>
+          <h3 class="feature__title">Your Family's Voice, Preserved</h3>
+          <p class="feature__text">
+            A professionally produced, one-hour keepsake delivered
+            as a high-quality audio file. Their voice, values, and
+            wisdom — available on any device, anytime.
+          </p>
+        </div>
 
-    <script src="/app.js" type="module"></script>
-  </body>
+        <div class="feature">
+          <div class="feature__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </div>
+          <h3 class="feature__title">Guided by a Legacy Facilitator</h3>
+          <p class="feature__text">
+            Our facilitators know how to draw out what truly matters
+            — values, lessons, perspective — gently, patiently,
+            with genuine care.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M4 13h24" stroke="currentColor" stroke-width="2"/><path d="M10 19h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="feature__title">Completely Private</h3>
+          <p class="feature__text">
+            Your family's legacy is sacred. We never share, publish,
+            or use anything from your session. It belongs to your
+            family alone.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 6C10 6 5 11 5 16s5 10 11 10c3 0 5.5-1 7.5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M16 10v6l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 class="feature__title">One Session, Zero Pressure</h3>
+          <p class="feature__text">
+            No scripts. No cameras. Just a warm, meaningful conversation
+            in a comfortable setting. We bring the tea; they bring
+            the wisdom.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 28V8a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v20" stroke="currentColor" stroke-width="2"/><path d="M6 28h20" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="2"/><path d="M16 11v-3M16 24v-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="feature__title">A Legacy That Lasts Generations</h3>
+          <p class="feature__text">
+            Long after they're gone, their values and voice remain.
+            For your children, grandchildren, and every generation
+            to come.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 28s-10-6-10-14a6 6 0 0 1 10-4.5A6 6 0 0 1 26 14c0 8-10 14-10 14z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </div>
+          <h3 class="feature__title">A Meaningful Milestone</h3>
+          <p class="feature__text">
+            For milestone birthdays, retirement, or simply because the
+            time feels right. Give the gift of legacy — captured in
+            their own voice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMOTIONAL INTERLUDE -->
+  <section class="interlude">
+    <div class="container">
+      <h2 class="interlude__title">
+        Every family has values that guide them — but few ever capture them.
+      </h2>
+      <p class="interlude__text">
+        What your family stands for. The lessons your dad learned the
+        hard way. The principles your grandmother lived by. The quiet
+        wisdom your mum carries about what truly matters. These aren't
+        just memories — they're your family's identity. And they
+        deserve to be passed down intentionally.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <h2 class="section__title">Simple Pricing</h2>
+      <p class="section__subtitle">One session. A lifetime of meaning.</p>
+
+      <div class="pricing-card">
+        <div class="pricing-card__badge">Most Popular</div>
+        <h3 class="pricing-card__name">The Legacy Session</h3>
+        <div class="pricing-card__price">
+          <span class="pricing-card__amount" id="price-display">$299</span>
+        </div>
+        <ul class="pricing-card__features">
+          <li>One-hour in-person legacy conversation</li>
+          <li>Professional audio capture equipment</li>
+          <li>A trained, empathetic legacy facilitator</li>
+          <li>Beautifully produced family keepsake</li>
+          <li>Delivered within 7 days</li>
+          <li>A living legacy — yours forever</li>
+        </ul>
+        <a class="btn btn--primary btn--lg btn--full" id="checkout-btn" href="#pricing">
+          Book &amp; Pay
+        </a>
+        <p class="pricing-card__note">
+          Prefer to book first and pay later? <a href="#book">Schedule a call</a> instead.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOK / CALENDLY -->
+  <section class="section section--warm" id="book">
+    <div class="container">
+      <h2 class="section__title">Create Your Family Legacy</h2>
+      <p class="section__subtitle">
+        Pick a time that works for you and your loved one.
+        We'll guide the conversation — you'll keep the legacy.
+      </p>
+      <div class="calendly-container" id="calendly-container">
+        <div class="calendly-placeholder" id="calendly-placeholder">
+          <p>Loading scheduler...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container container--narrow">
+      <h2 class="section__title">Questions &amp; Answers</h2>
+
+      <div class="faq-list">
+        <details class="faq">
+          <summary class="faq__q">Who is a Legacy Session for?</summary>
+          <p class="faq__a">
+            Anyone whose values and wisdom you want to preserve.
+            Parents, grandparents, aunts, uncles — anyone whose
+            perspective and lessons deserve to be passed down
+            (which is everyone).
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary class="faq__q">Where does the session take place?</summary>
+          <p class="faq__a">
+            We hold Legacy Sessions at The Line art gallery in Hastings
+            with tea and coffee served, a biscuit and a comfy chair to
+            relax in.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary class="faq__q">What if they're not sure what to talk about?</summary>
+          <p class="faq__a">
+            That's completely normal. Our facilitators are trained to
+            gently draw out what matters most — values, lessons,
+            perspective — with warmth and patience. Within minutes,
+            most people are sharing wisdom they've never put into
+            words before.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary class="faq__q">How is the legacy keepsake delivered?</summary>
+          <p class="faq__a">
+            You'll receive two USB keys, and a private link to download
+            from at anytime in case the USB sticks are lost, or expired.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary class="faq__q">Can I give this as a gift?</summary>
+          <p class="faq__a">
+            Absolutely. A Legacy Session is one of the most meaningful
+            gifts you can give — especially for milestone birthdays
+            or retirement. We can help you present it as a surprise.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary class="faq__q">What if they can't do a full hour?</summary>
+          <p class="faq__a">
+            That's completely fine. Some of the most powerful legacy
+            conversations are 20 minutes long. We work at their pace,
+            and there's never any pressure.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary class="faq__q">Is my family's legacy kept private?</summary>
+          <p class="faq__a">
+            Always. Your family's legacy is sacred to us. We never
+            publish, share, or use anything from your session. It
+            belongs to your family alone.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="cta-section__title">
+        Don't wait until you wish you had.
+      </h2>
+      <p class="cta-section__text">
+        Every family has wisdom worth preserving. Values worth
+        naming. A voice that deserves to be heard by generations
+        to come. This is the right time to do this.
+      </p>
+      <a href="#book" class="btn btn--primary btn--lg">Create Your Legacy</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__logo">Stories We Keep</p>
+          <p class="footer__tagline">Creating modern family legacies.</p>
+        </div>
+        <div class="footer__links">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#book">Book</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Stories We Keep. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Calendly widget -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="/app.js"></script>
+</body>
 </html>
