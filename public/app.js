@@ -28,6 +28,8 @@
   // -------------------------------------------------------------------
   const PRICES = { audio: 299, video: 499, storage: 99 };
 
+  const checkoutIds = new Set(["checkout-audio", "checkout-video"]);
+
   const tiers = [
     {
       key: "audio",
@@ -50,15 +52,43 @@
   tiers.forEach((tier) => {
     if (!tier.btn || !tier.check) return;
 
+    function getLink() {
+      return tier.check.checked ? tier.storageLink : tier.baseLink;
+    }
+
     function updateTier() {
       const withStorage = tier.check.checked;
       const total = PRICES[tier.key] + (withStorage ? PRICES.storage : 0);
-      const link = withStorage ? tier.storageLink : tier.baseLink;
+      const link = getLink();
 
-      if (tier.priceEl) tier.priceEl.textContent = "$" + total;
-      tier.btn.querySelector(".checkout-price").textContent = "$" + total;
-      if (link) tier.btn.href = link;
+      // Update price displays
+      if (tier.priceEl) {
+        tier.priceEl.textContent = "$" + total;
+        tier.priceEl.classList.add("price-updated");
+        setTimeout(() => tier.priceEl.classList.remove("price-updated"), 300);
+      }
+
+      const priceSpan = tier.btn.querySelector(".checkout-price");
+      if (priceSpan) priceSpan.textContent = "$" + total;
+
+      // Update button link
+      if (link) {
+        tier.btn.href = link;
+      } else {
+        tier.btn.href = "#book";
+      }
     }
+
+    // Handle checkout button clicks
+    tier.btn.addEventListener("click", function (e) {
+      const link = getLink();
+      if (link) {
+        // Navigate to Stripe
+        e.preventDefault();
+        window.location.href = link;
+      }
+      // If no link, the href="#book" fallback scrolls to the booking section
+    });
 
     tier.check.addEventListener("change", updateTier);
     updateTier(); // set initial state
@@ -152,9 +182,12 @@
   }
 
   // -------------------------------------------------------------------
-  // Smooth scroll for anchor links (fallback for older browsers)
+  // Smooth scroll for anchor links (skip checkout buttons)
   // -------------------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    // Skip checkout buttons — they have their own click handler
+    if (checkoutIds.has(anchor.id)) return;
+
     anchor.addEventListener("click", (e) => {
       const targetId = anchor.getAttribute("href");
       if (targetId === "#") return;

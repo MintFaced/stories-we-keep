@@ -523,6 +523,12 @@ a:hover { color: var(--color-walnut); }
   font-weight: 700;
   color: var(--color-ink);
   letter-spacing: -0.03em;
+  transition: transform 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.pricing-card__amount.price-updated {
+  transform: scale(1.06);
+  color: var(--color-amber);
 }
 
 .pricing-card__features {
@@ -581,6 +587,11 @@ a:hover { color: var(--color-walnut); }
 
 .pricing-card__addon:hover {
   border-color: var(--color-amber);
+}
+
+.pricing-card__addon-check:checked + .pricing-card__addon-text {
+  color: var(--color-ink);
+  font-weight: 500;
 }
 
 .pricing-card__addon-check {
