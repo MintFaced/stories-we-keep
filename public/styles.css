@@ -693,6 +693,13 @@ a:hover { color: var(--color-walnut); }
   max-width: 640px;
 }
 
+.faq__img {
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius);
+  margin-bottom: var(--space-md);
+}
+
 /* --- CTA Section --------------------------------------------------- */
 .cta-section {
   background:
