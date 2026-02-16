@@ -78,7 +78,10 @@ async function serveStatic(urlPath, res) {
     const body = await fs.readFile(fullPath);
     const ext = path.extname(fullPath).toLowerCase();
     const contentType = MIME_TYPES[ext] || "application/octet-stream";
-    res.writeHead(200, { "Content-Type": contentType });
+    res.writeHead(200, {
+      "Content-Type": contentType,
+      "Cache-Control": "no-cache",
+    });
     res.end(body);
   } catch {
     res.writeHead(404, { "Content-Type": "text/plain" });
